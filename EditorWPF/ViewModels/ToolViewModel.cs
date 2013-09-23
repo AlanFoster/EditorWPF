@@ -14,15 +14,15 @@ namespace EditorWPF.ViewModels
 {
     public class ToolViewModel
     {
-        public ObservableCollection<ITool> Tools { get; set; } 
-        public ITool Tool { get; private set; }
+        public ObservableCollection<ITool> Tools { get; set; }
+        public ObservableWrapper<ITool> CurrentTool { get; private set; }
         public ICommand UpdateTool { get; private set; }
 
         [Inject]
-        public ToolViewModel(ObservableCollection<ITool> tools)
+        public ToolViewModel(ObservableCollection<ITool> tools, ObservableWrapper<ITool> currentTool)
         {
             Tools = tools;
-            Tool = Tools.OfType<Pen>().First();
+            CurrentTool = currentTool;
             UpdateTool = new DelegateCommand<ITool>(Alert);
         }
 

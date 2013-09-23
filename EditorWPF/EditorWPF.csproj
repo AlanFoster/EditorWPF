@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\StatusBar.xaml.cs">
+      <DependentUpon>StatusBar.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,15 +71,22 @@
     <Compile Include="InjectionModule.cs" />
     <Compile Include="Models\ITool.cs" />
     <Compile Include="Models\Line.cs" />
+    <Compile Include="Models\ObservableWrapper.cs" />
     <Compile Include="Models\Pen.cs" />
     <Compile Include="Models\Polygonal.cs" />
     <Compile Include="Models\Text.cs" />
     <Compile Include="Models\Tool.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\StatusBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

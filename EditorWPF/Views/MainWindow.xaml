@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:EditorWPF.ViewModels"
+        xmlns:views="clr-namespace:EditorWPF.Views"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:ToolViewModel}"
         d:DesignHeight="300"
@@ -127,7 +128,7 @@
 
         <StatusBar VerticalAlignment="Bottom" Grid.Row="2">
             <StatusBarItem>
-                <TextBlock Name="CurrentTool">None</TextBlock>
+                <views:StatusBar />
             </StatusBarItem>
             <!--
                 <Separator/>

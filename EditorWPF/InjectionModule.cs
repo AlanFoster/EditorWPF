@@ -35,8 +35,14 @@ namespace EditorWPF
             Kernel.Bind<ITool>().To<Polygonal>().InSingletonScope();
             Kernel.Bind<ITool>().To<Text>().InSingletonScope();
 
+            var allTools = Kernel.GetAll<ITool>();
+
             Kernel.Bind<ObservableCollection<ITool>>()
-                .ToConstant(new ObservableCollection<ITool>(Kernel.GetAll<ITool>()))
+                .ToConstant(new ObservableCollection<ITool>(allTools))
+                .InSingletonScope();
+
+            Kernel.Bind<ObservableWrapper<ITool>>()
+                .ToConstant(new ObservableWrapper<ITool>(Kernel.Get<Pen>()))
                 .InSingletonScope();
         }
     }
