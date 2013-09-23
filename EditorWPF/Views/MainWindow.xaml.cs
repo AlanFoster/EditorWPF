@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows;
+using EditorWPF.Models;
 using EditorWPF.ViewModels;
+using Ninject;
 
 namespace EditorWPF.Views
 {
@@ -8,11 +12,11 @@ namespace EditorWPF.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        [Inject]
+        public MainWindow(ToolViewModel toolViewModel)
         {
             InitializeComponent();
-            // TODO DI
-            DataContext = new ToolViewModel();
+            DataContext = toolViewModel;
         }
     }
 }

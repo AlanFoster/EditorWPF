@@ -5,6 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using EditorWPF.Models;
+using EditorWPF.Views;
+using Ninject;
+using Ninject.Modules;
+using Ninject.Syntax;
 
 namespace EditorWPF
 {
@@ -13,5 +18,15 @@ namespace EditorWPF
     /// </summary>
     public partial class App : Application
     {
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            // Wire up our IoC module and grab the startup window to show
+            var injectionModel = new InjectionModule();
+            MainWindow = injectionModel.Load().Get<MainWindow>();
+            MainWindow.Show();
+        }
     }
+
+
 }
