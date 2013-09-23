@@ -5,9 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:EditorWPF.ViewModels"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance viewModels:StatusBarViewModel}"
+             DataContext="{Binding StatusBarViewModel}"
              d:DesignHeight="300"
              d:DesignWidth="400">
+    
     <StackPanel Orientation="Horizontal">
         <TextBlock Text="Selected Tool: "></TextBlock>
         <TextBlock Text="{Binding CurrentTool.Value.Name, Mode=OneWay}" />

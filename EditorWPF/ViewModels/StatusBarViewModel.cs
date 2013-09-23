@@ -7,7 +7,7 @@ using EditorWPF.Models;
 
 namespace EditorWPF.ViewModels
 {
-    class StatusBarViewModel
+    public class StatusBarViewModel
     {
         public ObservableWrapper<ITool> CurrentTool { get; private set; }
 

@@ -9,21 +9,28 @@ namespace EditorWPF.Commands
 {
     class DelegateCommand<T> : ICommand where T : class
     {
-        private readonly Action<T> _action;
+        private readonly Predicate<T> _canExecute;
+        private readonly Action<T> _execute;
+
+        public DelegateCommand(Predicate<T> canExecute, Action<T> execute)
+        {
+            _canExecute = canExecute;
+            _execute = execute;
+        }
 
         public DelegateCommand(Action<T> action)
+            : this(_ => true, action)
         {
-            _action = action;
         }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return _canExecute(parameter as T);
         }
 
         public void Execute(object parameter)
         {
-            _action(parameter as T);
+            _execute(parameter as T);
         }
 
         public event EventHandler CanExecuteChanged;

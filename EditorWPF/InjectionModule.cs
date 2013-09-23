@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using EditorWPF.Commands;
 using EditorWPF.Models;
 using EditorWPF.ViewModels;
 using EditorWPF.Views;
@@ -18,11 +20,12 @@ namespace EditorWPF
         public IKernel Load()
         {
             // If only we had a dependency injection framework to inject this kernal! :)
-            var kernel = new StandardKernel(
-                new ToolModule()
+           var kernal = new StandardKernel(
+                new ToolModule(),
+                new CommandModule()
             );
 
-            return kernel;
+            return kernal;
         }
     }
 
@@ -44,6 +47,15 @@ namespace EditorWPF
             Kernel.Bind<ObservableWrapper<ITool>>()
                 .ToConstant(new ObservableWrapper<ITool>(new EmptyTool()))
                 .InSingletonScope();
+        }
+    }
+
+    public class CommandModule : NinjectModule
+    {
+        public override void Load()
+        {
+            Kernel.Bind<UpdateTool>()
+              .ToSelf();
         }
     }
 

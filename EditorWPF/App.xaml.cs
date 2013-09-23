@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using EditorWPF.Models;
+﻿using System.Windows;
+using CommonServiceLocator.NinjectAdapter.Unofficial;
 using EditorWPF.Views;
+using Microsoft.Practices.ServiceLocation;
 using Ninject;
-using Ninject.Modules;
-using Ninject.Syntax;
 
 namespace EditorWPF
 {
@@ -22,8 +15,13 @@ namespace EditorWPF
         protected override void OnStartup(StartupEventArgs e)
         {
             // Wire up our IoC module and grab the startup window to show
-            var injectionModel = new InjectionModule();
-            MainWindow = injectionModel.Load().Get<MainWindow>();
+            var injectionModel = new InjectionModule().Load();
+
+            // We have to wire up a service locator adapter for Ninject, otherwise WPF always called the View's Empty constructors and NPE'd
+            // TODO Investigate why Ninject doesn't work in this scenario
+            ServiceLocator.SetLocatorProvider(() => new NinjectServiceLocator(injectionModel));
+            MainWindow = injectionModel.Get<MainWindow>();
+
             MainWindow.Show();
         }
     }
