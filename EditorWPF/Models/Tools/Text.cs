@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EditorWPF.Models
+namespace EditorWPF.Models.Tools
 {
-    class Pen : Tool
+    internal class Text : Tool
     {
-        private const string ToolName = "Pen";
+        private const string ToolName = "Text";
 
-        public Pen()
+        public Text()
             : base(ToolName)
         {
         }

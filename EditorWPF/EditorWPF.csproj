@@ -64,10 +64,27 @@
     </ApplicationDefinition>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\UpdateTool.cs" />
-    <Compile Include="Models\EmptyTool.cs" />
+    <Compile Include="Models\Tools\ITool.cs" />
+    <Compile Include="Models\Tools\Line.cs" />
+    <Compile Include="Models\Tools\Pen.cs" />
+    <Compile Include="Models\Tools\Polygonal.cs" />
+    <Compile Include="Models\Tools\Text.cs" />
+    <Compile Include="Models\Tools\Tool.cs" />
+    <Compile Include="Models\Tools\EmptyTool.cs" />
+    <Compile Include="Models\Shapes\IShape.cs" />
+    <Compile Include="Models\Tools\Rectangle.cs" />
+    <Compile Include="Models\Shapes\Shape.cs" />
+    <Compile Include="ViewModels\CanvasViewModel.cs" />
+    <Compile Include="Views\Canvas.xaml.cs">
+      <DependentUpon>Canvas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\StatusBar.xaml.cs">
       <DependentUpon>StatusBar.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Canvas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,13 +95,7 @@
     </Compile>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="InjectionModule.cs" />
-    <Compile Include="Models\ITool.cs" />
-    <Compile Include="Models\Line.cs" />
     <Compile Include="Models\ObservableWrapper.cs" />
-    <Compile Include="Models\Pen.cs" />
-    <Compile Include="Models\Polygonal.cs" />
-    <Compile Include="Models\Text.cs" />
-    <Compile Include="Models\Tool.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />

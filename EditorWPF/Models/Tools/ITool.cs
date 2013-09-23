@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EditorWPF.Models
+namespace EditorWPF.Models.Tools
 {
     public interface ITool
     {

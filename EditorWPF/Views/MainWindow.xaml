@@ -111,17 +111,7 @@
                 VerticalScrollBarVisibility="Auto"
                 Background="#F0F0F0"
                 >
-                    <Border 
-                                BorderBrush="Gray"
-                                VerticalAlignment="Top"
-                            >
-                        <Border.Effect>
-                            <DropShadowEffect>
-                                <DropShadowEffect.Opacity>0.3</DropShadowEffect.Opacity>
-                            </DropShadowEffect>
-                        </Border.Effect>
-                        <Rectangle Fill="SkyBlue"  Width="600" Height="350" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                    </Border>
+                    <views:Canvas HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 </ScrollViewer>
             </Border>
         </DockPanel>

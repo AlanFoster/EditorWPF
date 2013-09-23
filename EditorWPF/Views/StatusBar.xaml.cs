@@ -1,4 +1,6 @@
 ﻿using System.Windows.Controls;
+using EditorWPF.Models;
+using EditorWPF.Models.Tools;
 using EditorWPF.ViewModels;
 using Microsoft.Practices.ServiceLocation;
 
@@ -13,7 +15,8 @@ namespace EditorWPF.Views
         {
             InitializeComponent();
             // TODO FInd out why WPF always calls the empty constructor, which forced me to use this antipattern =[
-            DataContext = ServiceLocator.Current.GetInstance<StatusBarViewModel>();
+            //DataContext = ServiceLocator.Current.GetInstance<StatusBarViewModel>();
+            DataContext = new StatusBarViewModel(new ObservableWrapper<ITool>(new EmptyTool()));
         }
     }
 }

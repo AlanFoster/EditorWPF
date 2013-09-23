@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EditorWPF.Models
+namespace EditorWPF.Models.Tools
 {
-    class Line : Tool
+    internal class Polygonal : Tool
     {
-        private const string ToolName = "Line";
+        private const string ToolName = "Polygonal";
 
-        public Line()
+        public Polygonal()
             : base(ToolName)
         {
         }

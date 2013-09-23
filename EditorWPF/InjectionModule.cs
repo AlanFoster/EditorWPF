@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using EditorWPF.Commands;
 using EditorWPF.Models;
+using EditorWPF.Models.Tools;
 using EditorWPF.ViewModels;
 using EditorWPF.Views;
 using Ninject;
@@ -37,6 +38,7 @@ namespace EditorWPF
             Kernel.Bind<ITool>().To<Line>().InSingletonScope();
             Kernel.Bind<ITool>().To<Polygonal>().InSingletonScope();
             Kernel.Bind<ITool>().To<Text>().InSingletonScope();
+            Kernel.Bind<ITool>().To<Rectangle>().InSingletonScope();
 
             var allTools = Kernel.GetAll<ITool>();
 

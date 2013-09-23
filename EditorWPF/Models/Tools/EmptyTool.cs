@@ -1,4 +1,4 @@
-﻿namespace EditorWPF.Models
+﻿namespace EditorWPF.Models.Tools
 {
     /// <summary>
     ///     The default tool that does proves a noop implementation.

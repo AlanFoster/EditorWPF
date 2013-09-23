@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EditorWPF.Models
+namespace EditorWPF.Models.Tools
 {
-    abstract class Tool : ITool
+    public abstract class Tool : ITool
     {
         public string Name { get; private set; }
 
