@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using EditorWPF.Commands;
 using EditorWPF.Models;
+using EditorWPF.Models.Tools;
 using Ninject;
 
 namespace EditorWPF.ViewModels

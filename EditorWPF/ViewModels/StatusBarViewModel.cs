@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EditorWPF.Models;
+using EditorWPF.Models.Tools;
 
 namespace EditorWPF.ViewModels
 {

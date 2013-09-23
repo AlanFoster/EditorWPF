@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using EditorWPF.Models;
+using EditorWPF.Models.Tools;
 using Ninject;
 
 namespace EditorWPF.Commands
