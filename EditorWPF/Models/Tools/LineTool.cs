@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace EditorWPF.Models.Tools
 {
-    class Line : Tool
+    class LineTool : Tool
     {
         private const string ToolName = "Line";
 
-        public Line()
+        public LineTool()
             : base(ToolName)
         {
         }

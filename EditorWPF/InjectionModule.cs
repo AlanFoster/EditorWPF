@@ -34,11 +34,11 @@ namespace EditorWPF
     {
         public override void Load()
         {
-            Kernel.Bind<ITool>().To<Pen>().InSingletonScope();
-            Kernel.Bind<ITool>().To<Line>().InSingletonScope();
-            Kernel.Bind<ITool>().To<Polygonal>().InSingletonScope();
-            Kernel.Bind<ITool>().To<Text>().InSingletonScope();
-            Kernel.Bind<ITool>().To<Rectangle>().InSingletonScope();
+            Kernel.Bind<ITool>().To<PenTool>().InSingletonScope();
+            Kernel.Bind<ITool>().To<LineTool>().InSingletonScope();
+            Kernel.Bind<ITool>().To<PolygonalTool>().InSingletonScope();
+            Kernel.Bind<ITool>().To<TextTool>().InSingletonScope();
+            Kernel.Bind<ITool>().To<RectangleTool>().InSingletonScope();
 
             var allTools = Kernel.GetAll<ITool>();
 

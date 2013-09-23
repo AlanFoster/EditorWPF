@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace EditorWPF.Models.Tools
 {
-    internal class Polygonal : Tool
+    class PenTool : Tool
     {
-        private const string ToolName = "Polygonal";
+        private const string ToolName = "Pen";
 
-        public Polygonal()
+        public PenTool()
             : base(ToolName)
         {
         }
