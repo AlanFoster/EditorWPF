@@ -9,21 +9,11 @@
              Height="350" Width="600"
              d:DesignHeight="600" d:DesignWidth="350">
 
-    <UserControl.Resources>
-        <BrushConverter x:Key="BrushConverter"></BrushConverter>
-    </UserControl.Resources>
-    
-    <Border
-        BorderBrush="Gray"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Top">
-        <Border.Effect>
-            <DropShadowEffect>
-                <DropShadowEffect.Opacity>0.3</DropShadowEffect.Opacity>
-            </DropShadowEffect>
-        </Border.Effect>
-
-        <Canvas>
+        <Canvas Width="{Binding ElementName=UserControl, Path=ActualWidth}"
+                Height="{Binding ElementName=UserControl, Path=ActualHeight}"
+                Background="White"
+                SnapsToDevicePixels="True"
+                ClipToBounds="True">
             <ItemsControl ItemsSource="{Binding Shapes}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -36,20 +26,19 @@
                             Width="{Binding Size.X}"
                             Height="{Binding Size.Y}">
                             <Rectangle.Fill>
-                                <SolidColorBrush Color="{Binding Color}"></SolidColorBrush>
+                                <SolidColorBrush Color="{Binding Color}" />
                             </Rectangle.Fill>
-                            
-                            </Rectangle>
-                     </DataTemplate>
+
+                        </Rectangle>
+                    </DataTemplate>
                 </ItemsControl.ItemTemplate>
-                 <ItemsControl.ItemContainerStyle>
-                     <Style>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
                         <Setter Property="Canvas.Left" Value="{Binding Location.X}" />
-                         <Setter Property="Canvas.Top" Value="{Binding Location.Y}" />
-                     </Style>
-                 </ItemsControl.ItemContainerStyle>
+                        <Setter Property="Canvas.Top" Value="{Binding Location.Y}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
             </ItemsControl>
         </Canvas>
 
-    </Border>
 </UserControl>

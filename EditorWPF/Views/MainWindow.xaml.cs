@@ -18,5 +18,6 @@ namespace EditorWPF.Views
             InitializeComponent();
             DataContext = toolViewModel;
         }
+
     }
 }
