@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EditorWPF.ViewModels;
 
 namespace EditorWPF.Views
 {
@@ -23,6 +24,8 @@ namespace EditorWPF.Views
         public Canvas()
         {
             InitializeComponent();
+            // TODO
+            DataContext = new CanvasViewModel();
         }
     }
 }

@@ -64,6 +64,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\UpdateTool.cs" />
+    <Compile Include="Models\Shapes\Rectangle.cs" />
     <Compile Include="Models\Tools\ITool.cs" />
     <Compile Include="Models\Tools\LineTool.cs" />
     <Compile Include="Models\Tools\PenTool.cs" />
