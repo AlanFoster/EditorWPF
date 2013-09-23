@@ -42,7 +42,7 @@ namespace EditorWPF
                 .InSingletonScope();
 
             Kernel.Bind<ObservableWrapper<ITool>>()
-                .ToConstant(new ObservableWrapper<ITool>(Kernel.Get<Pen>()))
+                .ToConstant(new ObservableWrapper<ITool>(new EmptyTool()))
                 .InSingletonScope();
         }
     }
