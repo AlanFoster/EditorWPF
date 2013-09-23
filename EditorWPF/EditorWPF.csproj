@@ -61,6 +61,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Models\ITool.cs" />
+    <Compile Include="Models\Line.cs" />
+    <Compile Include="Models\Pen.cs" />
+    <Compile Include="Models\Polygonal.cs" />
+    <Compile Include="Models\Text.cs" />
+    <Compile Include="Models\Tool.cs" />
+    <Compile Include="ViewModels\ToolViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -100,10 +108,7 @@
     <Resource Include="Assets\Icons\undo-16.png" />
     <Resource Include="Assets\Icons\upload-16.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
