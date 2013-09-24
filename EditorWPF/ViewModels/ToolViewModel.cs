@@ -17,12 +17,14 @@ namespace EditorWPF.ViewModels
     {
         public ObservableCollection<ITool> Tools { get; set; }
         public ICommand UpdateTool { get; private set; }
+        public ICommand SaveLocal { get; private set; }
 
         [Inject]
         public ToolViewModel(ObservableCollection<ITool> tools, UpdateTool updateToolCommand)
         {
             Tools = tools;
             UpdateTool = updateToolCommand;
+            SaveLocal = new SaveLocalCommand();
         }
     }
 }
