@@ -63,6 +63,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\InsertShapeCommand.cs" />
+    <Compile Include="Commands\MouseCommand.cs" />
     <Compile Include="Commands\UpdateTool.cs" />
     <Compile Include="Models\Shapes\Rectangle.cs" />
     <Compile Include="Models\Tools\ITool.cs" />

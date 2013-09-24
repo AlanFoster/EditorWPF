@@ -3,17 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:EditorWPF"
              xmlns:viewModels="clr-namespace:EditorWPF.ViewModels"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:CanvasViewModel}"
              Height="350" Width="600"
-             d:DesignHeight="600" d:DesignWidth="350">
-
+             d:DesignHeight="600" d:DesignWidth="350"
+             >
+        
         <Canvas Width="{Binding ElementName=UserControl, Path=ActualWidth}"
                 Height="{Binding ElementName=UserControl, Path=ActualHeight}"
                 Background="White"
                 SnapsToDevicePixels="True"
-                ClipToBounds="True">
+                ClipToBounds="True"
+                Name="CanvasContainer"
+                >
+
+            <Canvas.InputBindings>
+                <MouseBinding
+                    MouseAction="LeftClick"
+                    Command="{Binding ClickTest}"
+                    CommandParameter="{Binding ElementName=CanvasContainer}"/>
+            </Canvas.InputBindings>
+            
             <ItemsControl ItemsSource="{Binding Shapes}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
