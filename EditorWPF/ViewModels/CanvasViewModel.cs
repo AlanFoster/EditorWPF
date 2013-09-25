@@ -12,21 +12,15 @@ namespace EditorWPF.ViewModels
 {
     class CanvasViewModel
     {
-        public ObservableCollection<IShape> Shapes { get; set; }
+        public ObservableCollection<IDrawable> Drawables { get; set; }
 
         public ICommand ClickTest { get; set; }
 
         public CanvasViewModel(ObservableWrapper<ITool> currentTool)
         {
-            Shapes = new ObservableCollection<IShape>()
-            {
-                new Rectangle(new Vector(2, 50), new Vector(50, 50), Colors.AliceBlue),
-                new Rectangle(new Vector(325, 33), new Vector(50, 50), Colors.Red),
-                new Rectangle(new Vector(235, 50), new Vector(50, 50), Colors.AntiqueWhite),
-                new Rectangle(new Vector(800, 49), new Vector(50, 50), Colors.CornflowerBlue)
-            };
+            Drawables = new ObservableCollection<IDrawable>();
 
-            ClickTest = new InsertShapeCommand(Shapes, currentTool);
+            ClickTest = new InsertShapeCommand(Drawables, currentTool);
         }
 
     }

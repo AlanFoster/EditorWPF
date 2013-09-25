@@ -69,7 +69,9 @@
     <Compile Include="Commands\MouseCommand.cs" />
     <Compile Include="Commands\SaveLocalCommand.cs" />
     <Compile Include="Commands\UpdateTool.cs" />
+    <Compile Include="Models\Shapes\IDrawable.cs" />
     <Compile Include="Models\Shapes\Rectangle.cs" />
+    <Compile Include="Models\Shapes\Screenshot.cs" />
     <Compile Include="Models\Tools\ITool.cs" />
     <Compile Include="Models\Tools\LineTool.cs" />
     <Compile Include="Models\Tools\PenTool.cs" />

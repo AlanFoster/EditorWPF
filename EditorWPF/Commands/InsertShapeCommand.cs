@@ -14,13 +14,13 @@ namespace EditorWPF.Commands
 {
     class InsertShapeCommand : MouseCommand
     {
-        private readonly ObservableCollection<IShape> _shapes;
+        private readonly ObservableCollection<IDrawable> _drawables;
         private readonly ObservableWrapper<ITool> _currentTool;
 
 
-        public InsertShapeCommand(ObservableCollection<IShape> shapes, ObservableWrapper<ITool> currentTool)
+        public InsertShapeCommand(ObservableCollection<IDrawable> drawables, ObservableWrapper<ITool> currentTool)
         {
-            _shapes = shapes;
+            _drawables = drawables;
             _currentTool = currentTool;
         }
 
@@ -28,7 +28,7 @@ namespace EditorWPF.Commands
         {
             var rectangleSize = new Vector(30, 30);
 
-            _shapes.Add(new Rectangle(mouse - (rectangleSize / 2), rectangleSize, Colors.Red));
+            _drawables.Add(new Rectangle(mouse - (rectangleSize / 2), rectangleSize, Colors.Red));
         }
     }
 }

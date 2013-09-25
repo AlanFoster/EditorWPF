@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:EditorWPF"
+             xmlns:shapes="clr-namespace:EditorWPF.Models.Shapes"
              xmlns:viewModels="clr-namespace:EditorWPF.ViewModels"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:CanvasViewModel}"
@@ -26,21 +26,21 @@
                     CommandParameter="{Binding ElementName=CanvasContainer}"/>
             </Canvas.InputBindings>
             
-            <ItemsControl ItemsSource="{Binding Shapes}">
+            <ItemsControl ItemsSource="{Binding Drawables}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas IsItemsHost="True" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
+                <ItemsControl.ItemTemplate >
+                    <!-- Rectangle shapes -->
+                    <DataTemplate DataType="{x:Type shapes:Rectangle}">
                         <Rectangle
                             Width="{Binding Size.X}"
                             Height="{Binding Size.Y}">
                             <Rectangle.Fill>
                                 <SolidColorBrush Color="{Binding Color}" />
                             </Rectangle.Fill>
-
                         </Rectangle>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

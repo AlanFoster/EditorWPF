@@ -3,13 +3,8 @@ using System.Windows.Media;
 
 namespace EditorWPF.Models.Shapes
 {
-    interface IShape
+    interface IShape : IDrawable
     {
-        /// <summary>
-        /// Represents the top left location of the Shape.
-        /// Where Vector(0,0) is the top left of the screen
-        /// </summary>
-        Vector Location { get; }
 
         /// <summary>
         /// Represents the size of the Shape, IE the rightmost and bottom most Vector.
