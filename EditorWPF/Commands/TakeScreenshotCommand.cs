@@ -44,15 +44,14 @@ namespace EditorWPF.Commands
             {
                 var bounds = Screen.AllScreens.Select(_ => _.Bounds).ToList();
 
-                // Calculate the total image size we'll need through the sum of all screen width and heights
-                var totalSize = bounds
-                    .Aggregate(new Vector(0, 0),
-                        (summation, bound) =>
-                            new Vector(summation.X + bound.Width, summation.Y + bound.Height));
-
                 // Calculate the leftmost, topmost screen location so we can draw relatively to that point, instead of screen one's 0,0
                 var relativeX = bounds.Select(_ => _.Left).Min();
                 var relativeY = bounds.Select(_ => _.Top).Min();
+
+                // Find the total size of the bitmap, based on the maximum distance away from the minimum relative bound
+                var totalSize = new Vector(
+                    bounds.Select(_ => _.Right).Max() - relativeX,
+                    bounds.Select(_ => _.Bottom).Max() - relativeY);
 
                 // Write all screens to a single bitmap
                 var bitmap = new Bitmap((int) totalSize.X, (int) totalSize.Y);
