@@ -7,7 +7,7 @@ using Microsoft.Win32;
 
 namespace EditorWPF.Commands
 {
-    class SaveLocalCommand : Command<IBitmappable>
+    public class SaveLocalCommand : Command<IBitmappable>
     {
         public override void Execute(IBitmappable bitmappable)
         {

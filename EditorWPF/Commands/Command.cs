@@ -7,6 +7,28 @@ using System.Windows.Input;
 
 namespace EditorWPF.Commands
 {
+    // TODO Add common base class
+    public abstract class Command : ICommand
+    {
+        public Command()
+        {
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object paramter)
+        {
+            Execute();
+        }
+
+        public abstract void Execute();
+
+        public event EventHandler CanExecuteChanged;
+    }
+
     public abstract class Command<T> : ICommand where T : class
     {
         private readonly DelegateCommand<T> _command;

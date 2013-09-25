@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace EditorWPF.Models.Shapes
 {
-    interface IDrawable
+    public interface IDrawable
     {
         /// <summary>
         /// Represents the top left location of the Shape.

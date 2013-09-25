@@ -5,12 +5,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:shapes="clr-namespace:EditorWPF.Models.Shapes"
              xmlns:viewModels="clr-namespace:EditorWPF.ViewModels"
+             xmlns:local="clr-namespace:EditorWPF"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:CanvasViewModel}"
              Height="350" Width="600"
              d:DesignHeight="600" d:DesignWidth="350"
              >
         
+    <UserControl.Resources>
+        <local:BitmapConverter x:Key="BitmapConverter" />
+
+        <!--
+            Drawing Data Template Resources 
+            Note, these data templates are used implicitly by WPF
+        -->
+        <!-- Screenshots -->
+        <DataTemplate DataType="{x:Type shapes:Screenshot}">
+            <Rectangle
+                                Width="{Binding Size.X}"
+                                Height="{Binding Size.Y}">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{Binding Bitmap, Converter={StaticResource BitmapConverter}}"></ImageBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </DataTemplate>
+
+        <!-- Rectangle shapes -->
+        <DataTemplate  DataType="{x:Type shapes:Rectangle}">
+            <Rectangle
+                            Width="{Binding Size.X}"
+                            Height="{Binding Size.Y}">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="{Binding Color}" />
+                </Rectangle.Fill>
+            </Rectangle>
+        </DataTemplate>
+    </UserControl.Resources>
+    
         <Canvas Width="{Binding ElementName=UserControl, Path=ActualWidth}"
                 Height="{Binding ElementName=UserControl, Path=ActualHeight}"
                 Background="White"
@@ -32,18 +63,7 @@
                         <Canvas IsItemsHost="True" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate >
-                    <!-- Rectangle shapes -->
-                    <DataTemplate DataType="{x:Type shapes:Rectangle}">
-                        <Rectangle
-                            Width="{Binding Size.X}"
-                            Height="{Binding Size.Y}">
-                            <Rectangle.Fill>
-                                <SolidColorBrush Color="{Binding Color}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
+
                 <ItemsControl.ItemContainerStyle>
                     <Style>
                         <Setter Property="Canvas.Left" Value="{Binding Location.X}" />

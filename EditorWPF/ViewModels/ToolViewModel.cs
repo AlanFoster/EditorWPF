@@ -18,13 +18,18 @@ namespace EditorWPF.ViewModels
         public ObservableCollection<ITool> Tools { get; set; }
         public ICommand UpdateTool { get; private set; }
         public ICommand SaveLocal { get; private set; }
+        public ICommand TakeScreenshot { get; private set; }
 
         [Inject]
-        public ToolViewModel(ObservableCollection<ITool> tools, UpdateTool updateToolCommand)
+        public ToolViewModel(ObservableCollection<ITool> tools,
+            UpdateTool updateToolCommand,
+            SaveLocalCommand saveLocalCommand,
+            TakeScreenshotCommand takeScreenshotCommmand)
         {
             Tools = tools;
             UpdateTool = updateToolCommand;
-            SaveLocal = new SaveLocalCommand();
+            SaveLocal = saveLocalCommand;
+            TakeScreenshot = takeScreenshotCommmand;
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using EditorWPF.Commands;
 using EditorWPF.Models;
+using EditorWPF.Models.Shapes;
 using EditorWPF.Models.Tools;
 using EditorWPF.ViewModels;
 using EditorWPF.Views;
@@ -23,10 +24,21 @@ namespace EditorWPF
             // If only we had a dependency injection framework to inject this kernal! :)
            var kernal = new StandardKernel(
                 new ToolModule(),
+                new DrawableModule(),
                 new CommandModule()
             );
 
             return kernal;
+        }
+    }
+
+    public class DrawableModule : NinjectModule
+    {
+        public override void Load()
+        {
+            Kernel.Bind<ObservableCollection<IDrawable>>()
+                .ToConstant(new ObservableCollection<IDrawable>())
+                .InSingletonScope();
         }
     }
 
@@ -56,8 +68,9 @@ namespace EditorWPF
     {
         public override void Load()
         {
-            Kernel.Bind<UpdateTool>()
-              .ToSelf();
+            Kernel.Bind<UpdateTool>().ToSelf().InSingletonScope();
+            Kernel.Bind<SaveLocalCommand>().ToSelf().InSingletonScope();
+            Kernel.Bind<TakeScreenshotCommand>().ToSelf().InSingletonScope();
         }
     }
 
