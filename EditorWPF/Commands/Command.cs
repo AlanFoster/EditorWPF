@@ -26,7 +26,7 @@ namespace EditorWPF.Commands
 
         public abstract void Execute();
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged = delegate { };
     }
 
     public abstract class Command<T> : ICommand where T : class
@@ -55,7 +55,7 @@ namespace EditorWPF.Commands
             _command.Execute(parameter);
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged = delegate { };
     }
 
 }

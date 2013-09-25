@@ -33,6 +33,6 @@ namespace EditorWPF.Commands
             _execute(parameter as T);
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged = delegate { };
     }
 }
