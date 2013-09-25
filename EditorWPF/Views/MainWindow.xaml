@@ -9,6 +9,7 @@
         d:DataContext="{d:DesignInstance viewModels:ToolViewModel}"
         d:DesignHeight="300"
         d:DesignWidth="400"
+        UseLayoutRounding="True"
         Title="ScreenShotter" Height="500" Width="800">
 
 <!--

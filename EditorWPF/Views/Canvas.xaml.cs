@@ -1,24 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using EditorWPF.Models;
-using EditorWPF.Models.Tools;
 using EditorWPF.ViewModels;
 using Microsoft.Practices.ServiceLocation;
 using Point = System.Windows.Point;
+using Size = System.Windows.Size;
 
 namespace EditorWPF.Views
 {
@@ -41,15 +30,11 @@ namespace EditorWPF.Views
 
         public Bitmap GetBitmap()
         {
-            var width = (int)Width;
-            var height = (int)Height;
-
-            var bitmapSource = BitmapSource(CanvasContainer, width, height, 96, 96);
+            var bitmapSource = BitmapSource(CanvasContainer);
 
             // GifBitmapEncoder, PngBitmapEncoer, JpegBitmapEncoder
             var encoder = new PngBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
-
 
             Bitmap createdBitmap;
             using (var stream = new MemoryStream())
@@ -62,23 +47,19 @@ namespace EditorWPF.Views
             return createdBitmap;
         }
 
-        private static BitmapSource BitmapSource(Visual target, int width, int height, double dpiX, double dpiY)
+        private static BitmapSource BitmapSource(UIElement target, double dpiX = 96, double dpiY = 96)
         {
             if (target == null) return null;
 
+            target.Measure(target.RenderSize);
+            target.Arrange(new Rect(target.RenderSize));
+
             var renderTarget = new RenderTargetBitmap(
-                width, height,
-                dpiX, dpiY, PixelFormats.Default);
+                (int)target.RenderSize.Width, (int)target.RenderSize.Height,
+                dpiX, dpiY, PixelFormats.Pbgra32);
 
-            var bounds = VisualTreeHelper.GetDescendantBounds(target);
-            var drawingVisual = new DrawingVisual();
-            using (var drawingContext = drawingVisual.RenderOpen())
-            {
-                var visualBrush = new VisualBrush(target);
-                drawingContext.DrawRectangle(visualBrush, null, new Rect(new Point(), bounds.Size));
-            }
+            renderTarget.Render(target);
 
-            renderTarget.Render(drawingVisual);
             return renderTarget;
         }
 
