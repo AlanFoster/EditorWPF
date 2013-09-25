@@ -36,7 +36,6 @@ namespace EditorWPF.Commands
 
         /// <summary>
         /// Takes a screenshot of all screens combined. 
-        /// TODO Ordering may be incorrect.
         /// </summary>
         /// <returns></returns>
         public Task<Bitmap> TakeScreenshot()
@@ -45,15 +44,15 @@ namespace EditorWPF.Commands
             {
                 var bounds = Screen.AllScreens.Select(_ => _.Bounds).ToList();
 
-                // Calculate the total image size we'll need thorugh the sum of all screen width and heights
+                // Calculate the total image size we'll need through the sum of all screen width and heights
                 var totalSize = bounds
                     .Aggregate(new Vector(0, 0),
                         (summation, bound) =>
                             new Vector(summation.X + bound.Width, summation.Y + bound.Height));
 
-                // Calculate the leftmost screen so we can draw relatively to that point, instead of screen 1's 0,0
-                var leftMostScreen = bounds.Select(_ => _.Left).Min();
-                var topMostScreen = bounds.Select(_ => _.Top).Min();
+                // Calculate the leftmost, topmost screen location so we can draw relatively to that point, instead of screen one's 0,0
+                var relativeX = bounds.Select(_ => _.Left).Min();
+                var relativeY = bounds.Select(_ => _.Top).Min();
 
                 // Write all screens to a single bitmap
                 var bitmap = new Bitmap((int) totalSize.X, (int) totalSize.Y);
@@ -64,9 +63,8 @@ namespace EditorWPF.Commands
                         graphics.CopyFromScreen(
                             // Source
                              bound.X, bound.Y,
-                            // Destination
-                            //0, 0,
-                             bound.X - leftMostScreen, bound.Y - topMostScreen,
+                             // Destination, relative to the leftmost/topmost location
+                             bound.X - relativeX, bound.Y - relativeY,
                              bound.Size,
                              CopyPixelOperation.SourceCopy);
                     }
