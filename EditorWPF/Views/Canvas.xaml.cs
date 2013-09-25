@@ -36,8 +36,7 @@ namespace EditorWPF.Views
         {
             InitializeComponent();
             // TODO
-            var currentTool = ServiceLocator.Current.GetInstance<ObservableWrapper<ITool>>();
-            DataContext = new CanvasViewModel(currentTool);
+            DataContext = ServiceLocator.Current.GetInstance<CanvasViewModel>();
         }
 
         public Bitmap GetBitmap()

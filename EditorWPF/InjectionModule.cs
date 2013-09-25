@@ -39,6 +39,10 @@ namespace EditorWPF
             Kernel.Bind<ObservableCollection<IDrawable>>()
                 .ToConstant(new ObservableCollection<IDrawable>())
                 .InSingletonScope();
+
+            Kernel.Bind<ObservableWrapper<Vector>>()
+                .ToConstant(new ObservableWrapper<Vector>(new Vector(500, 350)))
+                .InSingletonScope();
         }
     }
 
@@ -78,7 +82,8 @@ namespace EditorWPF
     {
         public override void Load()
         {
-            
+            Kernel.Bind<TakeScreenshotCommand>().ToSelf().InSingletonScope();
+            Kernel.Bind<CanvasViewModel>().ToSelf().InSingletonScope();
         }
     }
 }

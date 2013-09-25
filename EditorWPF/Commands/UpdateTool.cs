@@ -15,7 +15,7 @@ namespace EditorWPF.Commands
         public ObservableWrapper<ITool> CurrentTool { get; private set; }
 
         [Inject]
-        public UpdateTool(ObservableWrapper<ITool> currentTool) : base()
+        public UpdateTool(ObservableWrapper<ITool> currentTool)
         {
             CurrentTool = currentTool;
         }

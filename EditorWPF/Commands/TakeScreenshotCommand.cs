@@ -1,30 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Media;
 using EditorWPF.Models;
 using EditorWPF.Models.Shapes;
-using EditorWPF.Models.Tools;
 using Ninject;
-using Rectangle = EditorWPF.Models.Shapes.Rectangle;
 
 namespace EditorWPF.Commands
 {
     public class TakeScreenshotCommand : Command
     {
         private readonly ObservableCollection<IDrawable> _drawables;
+        private readonly ObservableWrapper<Vector> _canvasSize;
 
         [Inject]
-        public TakeScreenshotCommand(ObservableCollection<IDrawable> drawables)
+        public TakeScreenshotCommand(ObservableCollection<IDrawable> drawables, ObservableWrapper<Vector> canvasSize)
         {
             _drawables = drawables;
+            _canvasSize = canvasSize;
         }
 
         /// <summary>
@@ -35,33 +31,59 @@ namespace EditorWPF.Commands
             var screenshotTask = TakeScreenshot();
             screenshotTask
                 .ContinueWith(
-                    result => _drawables.Add(new Screenshot(new Vector(0, 0), screenshotTask.Result)),
+                    result =>
+                    {
+                        var bitmap = screenshotTask.Result;
+                        _drawables.Add(new Screenshot(new Vector(0, 0), screenshotTask.Result));
+                        // Force a Screen resize for better a better UX
+                        // TODO Should this could be handled within the Canvas logic instead
+                        _canvasSize.Value =
+                            new Vector(
+                                Math.Max(_canvasSize.Value.X, bitmap.Width),
+                                Math.Max(_canvasSize.Value.Y, bitmap.Height));
+                    },
                     TaskScheduler.FromCurrentSynchronizationContext()
                 );
         }
 
+        /// <summary>
+        /// Takes a screenshot of all screens combined. 
+        /// TODO Ordering may be incorrect.
+        /// </summary>
+        /// <returns></returns>
         public Task<Bitmap> TakeScreenshot()
         {
             var task = Task.Factory.StartNew(() =>
             {
-                // TODO create a single large bitmap 
-                Bitmap bitmap = null;
+                var bounds = Screen.AllScreens.Select(_ => _.Bounds).ToList();
 
-                foreach (var screen in Screen.AllScreens)
+                // Calculate the total image size we'll need thorugh the sum of all screen width and heights
+                var totalSize = bounds
+                    .Aggregate(new Vector(0, 0),
+                        (summation, bound) =>
+                            new Vector(summation.X + bound.Width, summation.Y + bound.Height));
+
+                // Calculate the leftmost screen so we can draw relatively to that point, instead of screen 1's 0,0
+                var leftMostScreen = bounds.Select(_ => _.Left).Min();
+                var topMostScreen = bounds.Select(_ => _.Top).Min();
+
+                // Write all screens to a single bitmap
+                var bitmap = new Bitmap((int) totalSize.X, (int) totalSize.Y);
+                using (var graphics = Graphics.FromImage(bitmap))
                 {
-                    var bounds = screen.Bounds;
-                    bitmap = new Bitmap(bounds.Width, bounds.Height);
-
-                    var graphics = Graphics.FromImage(bitmap);
-                    graphics.CopyFromScreen(
-                        // Source
-                        bounds.X, bounds.Y,
-                        // Destination
-                        0, 0,
-                        // bounds.X, bounds.Y,
-                        bounds.Size,
-                        CopyPixelOperation.SourceCopy);
+                    foreach(var bound in bounds)
+                    {
+                        graphics.CopyFromScreen(
+                            // Source
+                             bound.X, bound.Y,
+                            // Destination
+                            //0, 0,
+                             bound.X - leftMostScreen, bound.Y - topMostScreen,
+                             bound.Size,
+                             CopyPixelOperation.SourceCopy);
+                    }
                 }
+
                 return bitmap;
             });
             return task;
