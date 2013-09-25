@@ -39,10 +39,6 @@ namespace EditorWPF
             Kernel.Bind<ObservableCollection<IDrawable>>()
                 .ToConstant(new ObservableCollection<IDrawable>())
                 .InSingletonScope();
-
-            Kernel.Bind<ObservableWrapper<Vector>>()
-                .ToConstant(new ObservableWrapper<Vector>(new Vector(500, 350)))
-                .InSingletonScope();
         }
     }
 

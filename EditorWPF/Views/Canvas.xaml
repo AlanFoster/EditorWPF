@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:EditorWPF"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:CanvasViewModel}"
-             Height="{Binding Size.Value.Y}" Width="{Binding Size.Value.X}"
+             Height="{Binding Size.Y}" Width="{Binding Size.X}"
              d:DesignHeight="600" d:DesignWidth="350"
              >
         

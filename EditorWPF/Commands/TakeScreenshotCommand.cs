@@ -14,13 +14,11 @@ namespace EditorWPF.Commands
     public class TakeScreenshotCommand : Command
     {
         private readonly ObservableCollection<IDrawable> _drawables;
-        private readonly ObservableWrapper<Vector> _canvasSize;
 
         [Inject]
-        public TakeScreenshotCommand(ObservableCollection<IDrawable> drawables, ObservableWrapper<Vector> canvasSize)
+        public TakeScreenshotCommand(ObservableCollection<IDrawable> drawables)
         {
             _drawables = drawables;
-            _canvasSize = canvasSize;
         }
 
         /// <summary>
@@ -31,17 +29,7 @@ namespace EditorWPF.Commands
             var screenshotTask = TakeScreenshot();
             screenshotTask
                 .ContinueWith(
-                    result =>
-                    {
-                        var bitmap = screenshotTask.Result;
-                        _drawables.Add(new Screenshot(new Vector(0, 0), screenshotTask.Result));
-                        // Force a Screen resize for better a better UX
-                        // TODO Should this could be handled within the Canvas logic instead
-                        _canvasSize.Value =
-                            new Vector(
-                                Math.Max(_canvasSize.Value.X, bitmap.Width),
-                                Math.Max(_canvasSize.Value.Y, bitmap.Height));
-                    },
+                    result => _drawables.Add(new Screenshot(new Vector(0, 0), screenshotTask.Result)),
                     TaskScheduler.FromCurrentSynchronizationContext()
                 );
         }
