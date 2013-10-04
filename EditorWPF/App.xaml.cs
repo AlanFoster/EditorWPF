@@ -20,9 +20,12 @@ namespace EditorWPF
             // We have to wire up a service locator adapter for Ninject, otherwise WPF always called the View's Empty constructors and NPE'd
             // TODO Investigate why Ninject doesn't work in this scenario
             ServiceLocator.SetLocatorProvider(() => new NinjectServiceLocator(injectionModel));
-            MainWindow = injectionModel.Get<MainWindow>();
+           /* MainWindow = injectionModel.Get<MainWindow>();*/
+            MainWindow = injectionModel.Get<ImagesView>();
 
             MainWindow.Show();
+
+            base.OnStartup(e);
         }
     }
 

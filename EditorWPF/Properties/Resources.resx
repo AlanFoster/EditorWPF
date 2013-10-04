@@ -114,4 +114,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Image_Description_Description_must_be_greater_than_5" xml:space="preserve">
+    <value>Description must be greater than 5</value>
+  </data>
+  <data name="Image_Description_Description_must_be_less_than_20" xml:space="preserve">
+    <value>Description must be less than 20</value>
+  </data>
 </root>

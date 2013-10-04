@@ -70,6 +70,7 @@ namespace EditorWPF
         {
             Kernel.Bind<UpdateTool>().ToSelf().InSingletonScope();
             Kernel.Bind<SaveLocalCommand>().ToSelf().InSingletonScope();
+            Kernel.Bind<SaveHostCommand>().ToSelf().InSingletonScope();
             Kernel.Bind<TakeScreenshotCommand>().ToSelf().InSingletonScope();
         }
     }
@@ -80,6 +81,7 @@ namespace EditorWPF
         {
             Kernel.Bind<TakeScreenshotCommand>().ToSelf().InSingletonScope();
             Kernel.Bind<CanvasViewModel>().ToSelf().InSingletonScope();
+            Kernel.Bind<ImagesViewModel>().ToSelf().InSingletonScope();
         }
     }
 }

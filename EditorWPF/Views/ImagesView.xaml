@@ -1,0 +1,156 @@
+﻿<Window x:Class="EditorWPF.Views.ImagesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:EditorWPF.ViewModels"
+        xmlns:views="clr-namespace:EditorWPF.Views"
+        xmlns:editorWpf="clr-namespace:EditorWPF"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:ImagesViewModel}"
+        d:DesignHeight="300"
+        d:DesignWidth="400"
+        UseLayoutRounding="True"
+        Title="ScreenShotter" Height="500" Width="800">
+
+    <!--    <Window.Resources>
+        <editorWpf:BitmapConverter x:Key="BitmapConverter" />
+    </Window.Resources>-->
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <ListBox
+            ItemsSource="{Binding Images}"
+            Grid.Row="0" Grid.Column="0"
+            SelectedItem="{Binding SelectedImage, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Bitmap, Converter={editorWpf:BitmapConverter}}" Width="60" Height="60" />
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="{Binding Description}" />
+                            <Label Content="{Binding Author}" />
+                        </StackPanel>
+                    </StackPanel>
+                    <!--  <Button Command="{Binding ButtonClicked, RelativeSource=Parent}"
+                            CommandParameter="{Binding Description}">
+                        <Image Width="50"
+                               Height="50"
+                               Source="{Binding Picture}"></Image>
+                    </Button>-->
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel
+            Grid.Column="1"
+            Margin="10">
+
+            <StackPanel>
+                <!--
+                    Show a default message when no image is selected
+                -->
+                <Label Content="Please Select an Image">
+                    <Label.Style>
+                        <Style TargetType="{x:Type Label}">
+                            <Style.Setters>
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </Style.Setters>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedImage}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <!--                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation 
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    BeginTime="0"
+                                                    From="1"
+                                                    To="0"
+                                                    Duration="0:0:0.5" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>-->
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Label.Style>
+                </Label>
+
+                <!-- 
+                    Show the selected image 
+                -->
+                <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel
+                        HorizontalAlignment="Left">
+                        <Border BorderBrush="Gray" BorderThickness="1" Width="120" Height="120">
+                            <Image Source="{Binding SelectedImage.Bitmap, Converter={editorWpf:BitmapConverter}}"
+                                   Width="120" Height="120" />
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel
+                        HorizontalAlignment="Left"
+                        Grid.Row="0" Grid.Column="1"
+                        VerticalAlignment="Center">
+
+                        <DockPanel Margin="0 0 0 20">
+                            <Label>Id</Label>
+                            <Label Content="{Binding SelectedImage.Id}" />
+                        </DockPanel>
+
+                        <DockPanel Margin="0 0 0 20">
+                            <Label>Author</Label>
+                            <Label Content="{Binding SelectedImage.Author}" />
+                        </DockPanel>
+
+                        <DockPanel>
+                            <Label>Description</Label>
+                            <Label Content="{Binding SelectedImage.Description}" />
+                        </DockPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Label>Actions ::</Label>
+
+                        <Button Content="View" Margin="10"/>
+                        <Button Content="Delete" Margin="10" />
+                        <Button Content="Unselect" Command="{Binding Unselect}" Margin="10" />
+                    </StackPanel>
+                </Grid>
+                    <StackPanel.Style>
+                        <Style TargetType="{x:Type StackPanel}">
+                            <Style.Setters>
+                                <Setter Property="Visibility" Value="Visible" />
+                            </Style.Setters>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedImage}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

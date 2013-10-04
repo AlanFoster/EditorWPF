@@ -44,7 +44,10 @@
                         <Image Source="..\Assets\Icons\new_window-16.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Save _Host">
+                <MenuItem Header="Save _Host"
+                          Command="{Binding SaveHost}"
+                          CommandParameter="{Binding ElementName=CanvasUserControl}"
+                          >
                     <MenuItem.Icon>
                         <Image Source="..\Assets\Icons\upload-16.png" />
                     </MenuItem.Icon>

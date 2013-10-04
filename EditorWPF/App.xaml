@@ -1,6 +1,14 @@
 ﻿<Application x:Class="EditorWPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:editorWpf="clr-namespace:EditorWPF">
     <Application.Resources>
+<!--        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>-->
+        
+<!--        <editorWpf:BitmapConverter x:Key="BitmapConverter" />-->
     </Application.Resources>
 </Application>

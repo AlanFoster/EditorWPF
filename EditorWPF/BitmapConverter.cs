@@ -10,13 +10,16 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 using EditorWPF.Views;
 
 namespace EditorWPF
 {
-    class BitmapConverter : IValueConverter
+    class BitmapConverter : MarkupExtension, IValueConverter
     {
+        private static readonly Lazy<BitmapConverter> Converter = new Lazy<BitmapConverter>();
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var bitmap = value as Bitmap;
@@ -39,6 +42,11 @@ namespace EditorWPF
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
+        }
+
+        public override object ProvideValue(IServiceProvider serviceProvider)
+        {
+            return Converter.Value;
         }
     }
 }

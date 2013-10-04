@@ -46,7 +46,11 @@
     <Reference Include="Ninject">
       <HintPath>packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>packages\RestSharp.104.2.0\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -71,9 +75,11 @@
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\InsertShapeCommand.cs" />
     <Compile Include="Commands\MouseCommand.cs" />
+    <Compile Include="Commands\SaveHostCommand.cs" />
     <Compile Include="Commands\SaveLocalCommand.cs" />
     <Compile Include="Commands\TakeScreenshotCommand.cs" />
     <Compile Include="Commands\UpdateTool.cs" />
+    <Compile Include="Models\domain\Image.cs" />
     <Compile Include="Models\Shapes\IDrawable.cs" />
     <Compile Include="Models\Shapes\Rectangle.cs" />
     <Compile Include="Models\Shapes\Screenshot.cs" />
@@ -88,10 +94,15 @@
     <Compile Include="Models\Tools\RectangleTool.cs" />
     <Compile Include="Models\Shapes\Shape.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ViewModels\CanvasViewModel.cs" />
+    <Compile Include="ViewModels\ImagesViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="Views\Canvas.xaml.cs">
       <DependentUpon>Canvas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImagesView.xaml.cs">
+      <DependentUpon>ImagesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
@@ -100,6 +111,10 @@
       <DependentUpon>StatusBar.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Canvas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ImagesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -148,6 +163,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="CheatSheet.md" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

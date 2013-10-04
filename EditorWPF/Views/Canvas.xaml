@@ -12,8 +12,6 @@
              >
         
     <UserControl.Resources>
-        <local:BitmapConverter x:Key="BitmapConverter" />
-
         <!--
             Drawing Data Template Resources 
             Note, these data templates are used implicitly by WPF
