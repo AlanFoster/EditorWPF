@@ -59,23 +59,5 @@ namespace EditorWPF.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Description must be greater than 5.
-        /// </summary>
-        internal static string Image_Description_Description_must_be_greater_than_5 {
-            get {
-                return ResourceManager.GetString("Image_Description_Description_must_be_greater_than_5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Description must be less than 20.
-        /// </summary>
-        internal static string Image_Description_Description_must_be_less_than_20 {
-            get {
-                return ResourceManager.GetString("Image_Description_Description_must_be_less_than_20", resourceCulture);
-            }
-        }
     }
 }

@@ -182,6 +182,12 @@
     <Resource Include="Assets\Icons\undo-16.png" />
     <Resource Include="Assets\Icons\upload-16.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EditorDomain\EditorDomain.csproj">
+      <Project>{3d6d0a79-0385-4334-a893-9d7d971e90e2}</Project>
+      <Name>EditorDomain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
