@@ -9,7 +9,7 @@ namespace EditorServices.Services
     public interface IEditorService
     {
         [OperationContract]
-        void AddImage(Image image);
+        int AddImage(Image image);
 
         [OperationContract]
         List<Image> GetImages();

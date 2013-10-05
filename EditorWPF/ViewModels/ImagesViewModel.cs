@@ -3,10 +3,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using EditorWPF.Commands;
-using Image = EditorWPF.Models.domain.Image;
+using EditorWPF.EditorService;
+using Ninject.Infrastructure.Language;
+using Image = EditorWPF.EditorService.Image;
 
 namespace EditorWPF.ViewModels
 {
@@ -26,33 +27,27 @@ namespace EditorWPF.ViewModels
         }
 
         public ICommand Unselect { get; set; }
+        public ICommand Delete { get; set; }
+
+        private IEditorService _editorService;
 
         public ImagesViewModel()
         {
-            var randomBitmap = new Func<int, Bitmap>(i =>
-            {
-                var bitmap = new Bitmap(100, 100);
-                using (var graphics = Graphics.FromImage(bitmap))
-                {
-                    var randomColor = Color.FromKnownColor(((KnownColor[]) Enum.GetValues(typeof (KnownColor)))[i]);
-                    using (var brush = new SolidBrush(randomColor))
-                    {
-                        graphics.FillRectangle(brush, 0, 0, 100, 100);
-                    }
-                }
-                return bitmap;
-            });
 
-            Images = new ObservableCollection<Image>(Enumerable.Range(1, 20).Select(i => new Image
-            {
-                Id = i,
-                Author = "Alan",
-                Description = string.Format("Image #{0}", i),
-                Bitmap = randomBitmap(i)
-            }));
-
+            _editorService = new EditorServiceClient();
+            Images = new ObservableCollection<Image>(_editorService.GetImages());
 
             Unselect = new DelegateCommand<Object>(_ => SelectedImage = null);
+            Delete = new DelegateCommand<Object>(_ =>
+            {
+                var id = SelectedImage.Id;
+
+                // Perform local modifications to provide a richer user experience
+                Unselect.Execute(null);
+                Images.Remove(Images.FirstOrDefault(image => image.Id == id));
+
+                _editorService.RemoveImageAsync(id);
+            });
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };

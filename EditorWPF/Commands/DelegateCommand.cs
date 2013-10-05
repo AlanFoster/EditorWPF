@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace EditorWPF.Commands
 {
-    class DelegateCommand<T> : ICommand where T : class
+    internal class DelegateCommand<T> : ICommand
     {
         private readonly Predicate<T> _canExecute;
         private readonly Action<T> _execute;
@@ -25,12 +21,14 @@ namespace EditorWPF.Commands
 
         public bool CanExecute(object parameter)
         {
-            return _canExecute(parameter as T);
+            // Note, we cannot use `parameter as T`, as if we provide `where T : class`, we can no longer use int as a parameter
+            return _canExecute(parameter is T ? (T) parameter : default(T));
         }
 
         public void Execute(object parameter)
         {
-            _execute(parameter as T);
+            // Note, we cannot use `parameter as T`, as if we provide `where T : class`, we can no longer use int as a parameter
+            _execute(parameter is T ? (T) parameter : default(T));
         }
 
         public event EventHandler CanExecuteChanged = delegate { };

@@ -15,6 +15,8 @@
 	- http://www.codeproject.com/Articles/39198/Automatically-validating-business-entities-in-WPF :)
 	- http://www.codeproject.com/Articles/97564/Attributes-based-Validation-in-a-WPF-MVVM-Applicat
 
+http://fluentvalidation.codeplex.com/
+
 Testing 
 =======
 

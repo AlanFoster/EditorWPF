@@ -133,8 +133,12 @@
                         <Label>Actions ::</Label>
 
                         <Button Content="View" Margin="10"/>
-                        <Button Content="Delete" Margin="10" />
-                        <Button Content="Unselect" Command="{Binding Unselect}" Margin="10" />
+                            <Button Content="Delete" 
+                                    Command="{Binding Delete}"
+                                    Margin="10" />
+                            <Button Content="Unselect" 
+                                    Command="{Binding Unselect}"
+                                    Margin="10" />
                     </StackPanel>
                 </Grid>
                     <StackPanel.Style>

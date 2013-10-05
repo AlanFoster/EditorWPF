@@ -53,6 +53,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -95,6 +97,11 @@
     <Compile Include="Models\Shapes\Shape.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="Service References\EditorService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\CanvasViewModel.cs" />
     <Compile Include="ViewModels\ImagesViewModel.cs" />
     <Compile Include="ViewModels\MenuViewModel.cs" />
@@ -170,6 +177,22 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\EditorService\EditorServices.DataContracts.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EditorService\EditorWPF.EditorService.Image.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EditorService\service.wsdl" />
+    <None Include="Service References\EditorService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EditorService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EditorService\System.Drawing.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="_MSBuild\NuGetPackageAndPublish.targets" />
   </ItemGroup>
   <ItemGroup>
@@ -183,10 +206,22 @@
     <Resource Include="Assets\Icons\upload-16.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EditorDomain\EditorDomain.csproj">
-      <Project>{3d6d0a79-0385-4334-a893-9d7d971e90e2}</Project>
-      <Name>EditorDomain</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\EditorService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EditorService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EditorService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EditorService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
